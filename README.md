@@ -38,5 +38,5 @@ your smtp server.
 
 ##TODO##
 
-*Attachments  
-*Multiple Sender Address
+-Attachments  
+-Multiple Sender Address
