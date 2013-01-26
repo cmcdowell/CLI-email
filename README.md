@@ -25,7 +25,12 @@ Clone the git repo.
     $ git clone https://github.com/cmcdowell/CLI-email.git
     $ mkdir ~/.bin
 
-Move emailer.py and settings.ini to `~/.bin`
+Move emailer.py and settings.ini to `~/.bin`  
+  
+Make emailer.py executeable.
+
+    $ chmod +x emailer.py
+    
 Add this to your .bashrc
 
     export PATH=$PATH:$HOME/.bin
