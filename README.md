@@ -22,10 +22,9 @@ Send to multiple email address by separating them with a comma.
 
 Clone the git repo.
 
+    $ mkdir ~/.bin ; cd ~/.bin
     $ git clone https://github.com/cmcdowell/CLI-email.git
-    $ mkdir ~/.bin
-
-Move emailer.py and settings.ini to `~/.bin`  
+      
   
 Make emailer.py executeable.
 
@@ -33,7 +32,7 @@ Make emailer.py executeable.
     
 Add this to your .bashrc
 
-    export PATH=$PATH:$HOME/.bin
+    export PATH=$PATH:$HOME/.bin/CLI-email
 
 ##Settings##
 
