@@ -14,7 +14,7 @@ Run interactively.
     $ emailer.py Lunch pete@example.com
     Please enter your message> Were heading to the coffe shop, meet you there.
 
-Send to multiple email address by separating them wiht a comma.
+Send to multiple email address by separating them with a comma.
 
     $ heroku logs | grep 500 | emailer.py '500 errors for our site' dev@example.com,sysadmin@example.com
 
