@@ -16,8 +16,7 @@ Run interactively.
 
 Send to multiple email address by separating them wiht a comma.
 
-    $ heroku logs | grep 500 | emailer.py '500 errors for our site'
-dev@example.com,sysadmin@example.com
+    $ heroku logs | grep 500 | emailer.py '500 errors for our site' dev@example.com,sysadmin@example.com
 
 ##Installation Instructions##
 
