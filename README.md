@@ -1,4 +1,4 @@
-#CLI-email#  
+#CLI-email  
 
 Do you find yourself having to copy and paste log files, configuration files,
 and text documents to email them?  
@@ -14,22 +14,25 @@ Run interactively.
     $ emailer.py Lunch pete@example.com
     Please enter your message> Were heading to the coffe shop, meet you there.
 
-Send to multiple email address by separating them wiht a comma.
+Send to multiple email address by separating them with a comma.
 
-    $ heroku logs | grep 500 | emailer.py '500 errors for our site'
-dev@example.com,sysadmin@example.com
+    $ heroku logs | grep 500 | emailer.py '500 errors for our site' dev@example.com,sysadmin@example.com
 
 ##Installation Instructions##
 
 Clone the git repo.
 
+    $ mkdir ~/.bin ; cd ~/.bin
     $ git clone https://github.com/cmcdowell/CLI-email.git
-    $ mkdir ~/.bin
+      
+  
+Make emailer.py executeable.
 
-Move emailer.py and settings.ini to `~/.bin`
+    $ chmod +x emailer.py
+    
 Add this to your .bashrc
 
-    export PATH=$PATH:$HOME/.bin
+    export PATH=$PATH:$HOME/.bin/CLI-email
 
 ##Settings##
 
@@ -39,6 +42,5 @@ your smtp server.
 
 ##TODO##
 
-*Attachments  
-
-*Multiple Sender Address
+-Attachments  
+-Multiple Sender Address
