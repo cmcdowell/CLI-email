@@ -1,14 +1,17 @@
 #!/usr/bin/env python
 
 import smtplib
+import os
 import sys
 from ConfigParser import SafeConfigParser, NoSectionError, Error
 
 def main():
 
+    path = os.path.split(os.path.realpath(__file__))[0]
+
     parser = SafeConfigParser()
     try:
-        parser.read('settings.ini')
+        parser.read(path + '/settings.ini')
     except Error as e:
         print 'Error, settings.ini.', e
         sys.exit()
