@@ -1,23 +1,35 @@
 #!/usr/bin/env python
 
-import smtplib
-import os
-import sys
 from ConfigParser import SafeConfigParser, NoSectionError, Error
+import argparse
+import os
+import smtplib
+import re
+import sys
+
 
 def main():
 
+    argument_parser = argparse.ArgumentParser(prog='mail')
+    argument_parser.add_argument('subject', help='The subject of the email')
+    argument_parser.add_argument('to', help='The destination email address')
+    args = argument_parser.parse_args()
+
+    if not re.match(r'.*@.*', args.to):
+        print args.to, ' is not a vialid email address.'
+        sys.exit()
+
     path = os.path.split(os.path.realpath(__file__))[0]
 
-    parser = SafeConfigParser()
+    config_parser = SafeConfigParser()
     try:
-        parser.read(path + '/settings.ini')
+        config_parser.read(os.path.join(path, 'settings.ini'))
     except Error as e:
         print 'Error, settings.ini.', e
         sys.exit()
 
     try:
-        settings = dict(parser.items('email'))
+        settings = dict(config_parser.items('email'))
     except NoSectionError as e:
         print 'Error settings.ini.', e
         sys.exit()
@@ -31,27 +43,14 @@ def main():
         print e
         sys.exit()
 
-
-    try:
-        subject = sys.argv[1]
-    except IndexError:
-        print 'Please provide a subject'
-        sys.exit()
-
-    try:
-        to = (sys.argv[2]).split(',')
-    except IndexError:
-        print 'Please provide a destination e-mail address'
-        sys.exit()
-
     if sys.stdin.isatty():
         msg = raw_input('Please enter your message >')
     else:
         msg = '<br>'.join(line for line in sys.stdin)
 
     headers = ['From: ' + user,
-               'Subject: ' + subject,
-               'To: ' + str(to),
+               'Subject: ' + args.subject,
+               'To: ' + args.to,
                'MIME-Version: 1.0',
                'Content-Type: text/html']
     headers = '\r\n'.join(headers)
@@ -63,14 +62,13 @@ def main():
     session.login(user, password)
 
     try:
-        session.sendmail(user, to, headers + '\r\n\r\n' + msg)
+        session.sendmail(user, args.to, headers + '\r\n\r\n' + msg)
     except smtplib.SMTPException as e:
         print 'Error.'
         for key in e.args[0].keys():
             print key
             for msg in e.args[0][key]:
                 print msg
-
 
     session.quit()
 
